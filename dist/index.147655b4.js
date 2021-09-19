@@ -456,44 +456,76 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"i87aF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _kaboom = require("kaboom");
+var _kaboom = require("./kaboom");
 var _kaboomDefault = parcelHelpers.interopDefault(_kaboom);
 var _mainScene = require("./scenes/main.scene");
 var _mainSceneDefault = parcelHelpers.interopDefault(_mainScene);
+var _patutiScene = require("./scenes/patuti.scene");
+var _patutiSceneDefault = parcelHelpers.interopDefault(_patutiScene);
+// k.loadRoot("https://imgur.com/");
+// k.loadSprite("area", "PLsvqPC.png");
+// k.loadSprite("idle", "Fmgkm0j.png");
+_kaboomDefault.default.scene("main", _patutiSceneDefault.default);
+_kaboomDefault.default.start('main');
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC","./kaboom":"5LAWF","./scenes/main.scene":"8pcnP","./scenes/patuti.scene":"i7gMP"}],"ixXZC":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule') return;
+        // Skip duplicate re-exports when they have the same value.
+        if (key in dest && dest[key] === source[key]) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"5LAWF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "k", ()=>k
+);
+var _kaboom = require("kaboom");
+var _kaboomDefault = parcelHelpers.interopDefault(_kaboom);
 const kaboomConf = {
     width: 340,
     height: 240,
-    scale: 3,
+    scale: 2,
     stretch: true,
     letterbox: true,
     font: "sinko",
-    //   clearColor: [0, 0, 0, 1],
+    clearColor: [
+        0,
+        0,
+        0,
+        1
+    ],
     global: true
 };
 const k = _kaboomDefault.default(kaboomConf);
-// init main scene
-k.scene("main", _mainSceneDefault.default());
-// k.scene("start game", () => {
-//     // k.add([
-//     //     k.text("START", 32),
-//     //     k.pos(k.width() * 0.5, k.height() * 0.5),
-//     //     k.origin('center')
-//     // ]);
-//     // add a floor
-// 	k.add([
-// 		k.pos(0, k.height()),
-// 		k.rect(k.width(), 50),
-// 		k.solid()
-// 	])
-// });
-// action(() => {
-//     if (keyIsDown("left")) {
-//         k.start('start game');
-//     }
-// });
-k.start('main');
+exports.default = k;
 
-},{"kaboom":"iEfyY","@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC","./scenes/main.scene":"8pcnP"}],"iEfyY":[function(require,module,exports) {
+},{"kaboom":"iEfyY","@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}],"iEfyY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var Je = Object.defineProperty, Qt = Object.defineProperties;
@@ -2972,50 +3004,128 @@ var pn = nn((Un, qt)=>{
 });
 exports.default = pn();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}],"ixXZC":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule') return;
-        // Skip duplicate re-exports when they have the same value.
-        if (key in dest && dest[key] === source[key]) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"8pcnP":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}],"8pcnP":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-exports.default = mainScene = (k)=>{
-    k.add([
-        k.text("Patuti\nPress Space to Start", 16),
-        k.pos(k.width() * 0.5, k.height() * 0.5),
-        k.origin('center'),
-        k.color(1, 1, 1, 1), 
+var _kaboom = require("../kaboom");
+var _kaboomDefault = parcelHelpers.interopDefault(_kaboom);
+exports.default = mainScene = ()=>{
+    const { add  } = _kaboomDefault.default;
+    add([
+        _kaboomDefault.default.text("Patuti\nPress Space to Start", 16),
+        _kaboomDefault.default.pos(_kaboomDefault.default.width() * 0.5, _kaboomDefault.default.height() * 0.5),
+        _kaboomDefault.default.origin('center'),
+        _kaboomDefault.default.color(1, 1, 1, 1), 
     ]);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}]},["4bw0B","i87aF"], "i87aF", "parcelRequirea0f8")
+},{"../kaboom":"5LAWF","@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}],"i7gMP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _kaboom = require("../kaboom");
+var _kaboomDefault = parcelHelpers.interopDefault(_kaboom);
+var _movement = require("../core/movement");
+var _movementDefault = parcelHelpers.interopDefault(_movement);
+var _controls = require("../core/controls");
+var _controlsDefault = parcelHelpers.interopDefault(_controls);
+exports.default = patutiScene = ()=>{
+    const { add , pos , rect , color , origin , collides , layers , solid , area  } = _kaboomDefault.default;
+    // layers(['bg', 'area', 'player'])
+    const player = add([
+        pos(_kaboomDefault.default.width() * 0.5, _kaboomDefault.default.height() * 0.5),
+        rect(16, 16),
+        color(0, 1, 0, 1),
+        origin('center'),
+        area(),
+        // body(),
+        _movementDefault.default(),
+        _controlsDefault.default(), 
+    ]);
+    const ground = add([
+        pos(_kaboomDefault.default.width() * 0.5, _kaboomDefault.default.height() * 0.6),
+        rect(64, 16),
+        color(0, 1, 0, 1),
+        origin('center'),
+        area(), 
+    ]);
+// collides("player", "ground", () => {
+//     console.log("collide");
+// });
+};
+
+},{"../kaboom":"5LAWF","@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC","../core/movement":"feEa5","../core/controls":"1LA4x"}],"feEa5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _kaboom = require("../kaboom");
+var _kaboomDefault = parcelHelpers.interopDefault(_kaboom);
+function movement() {
+    const { vec2  } = _kaboomDefault.default;
+    const direction = vec2(0, 0);
+    const speed = 1;
+    return {
+        // add(){
+        //     this.movement.right();
+        // },
+        update () {
+            if (!this.pos) return;
+            this.pos.x += direction.x * speed;
+            this.pos.y += direction.y * speed;
+        },
+        movement: {
+            left () {
+                direction.x = -2;
+                direction.y = 0;
+            },
+            right () {
+                direction.x = 2;
+                direction.y = 0;
+            },
+            stop () {
+                direction.x = 0;
+            }
+        }
+    };
+}
+exports.default = movement;
+
+},{"../kaboom":"5LAWF","@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}],"1LA4x":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _kaboom = require("../kaboom");
+var _kaboomDefault = parcelHelpers.interopDefault(_kaboom);
+function controls() {
+    const { keyPress , keyRelease  } = _kaboomDefault.default;
+    return {
+        add () {
+            keyPress('left', ()=>{
+                console.log("left is keydown");
+                this.movement.left();
+            // this.moveTo(100, 200);
+            });
+            keyRelease('left', ()=>{
+                console.log("left is released");
+                this.movement.stop();
+            // this.moveTo(100, 200);
+            });
+            keyPress('right', ()=>{
+                this.movement.right();
+            // this.moveTo(200, 100);
+            });
+            keyRelease('right', ()=>{
+                console.log("right is released");
+                this.movement.stop();
+            // this.moveTo(100, 200);
+            });
+            keyPress('up', ()=>{
+                this.jump();
+            });
+            keyPress('down', ()=>{
+            });
+        }
+    };
+}
+exports.default = controls;
+
+},{"../kaboom":"5LAWF","@parcel/transformer-js/src/esmodule-helpers.js":"ixXZC"}]},["4bw0B","i87aF"], "i87aF", "parcelRequirea0f8")
 
 //# sourceMappingURL=index.147655b4.js.map
