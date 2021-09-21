@@ -1,32 +1,39 @@
-// import k from "../../kaboom.js";
-import { k } from "../../main.js";
-import movement from "../core/movement.js";
-import controls from "../core/controls.js";
-
+import k from "../core/kaboom.js";
+import controls from "../functions/controls.js";
+import { AREA_SCALE, PATUTI_SCALE, BG_SCALE } from "../core/constants.js";
 
 export default () => {
-    const { add, pos, rect, color, origin, collides, layers, solid, area } = k;
-    // layers(['bg', 'area', 'player'])
-    const player = add([
-        pos(k.width() * 0.5, k.height() * 0.5),
-        rect(16,16),
-        color(0, 1, 0, 1),
-        origin('center'),
-        area(),
-        // body(),
-        movement(),
-        controls(),
+
+    layers([
+      "bg",
+      "game",
+      "ui",
+    ], "game");
+
+    add([
+        sprite('bg'), 
+        layer('bg'),
+        scale(BG_SCALE),
     ])
 
-    const ground = add([
-        pos(k.width() * 0.5, k.height() * 0.6),
-        rect(70,16),
-        color(0, 1, 0, 1),
-        origin('center'),
-        area(),
-        // solid(),
-    ])
-    // collides("player", "ground", () => {
-    //     console.log("collide");
-    // });
-}
+    const patuti = add([
+      "patuti",
+      sprite("patuti"),
+      scale(PATUTI_SCALE),
+      pos(k.width() * 0.5, k.height() * 0.3),
+      origin("center"),
+      area(scale(0.4, 1)),
+      body(),
+      controls(),
+    ]);
+
+    add([
+      sprite("area"),
+      scale(AREA_SCALE),
+      pos(k.width() * 0.5, k.height() * 0.7),
+      origin("center"),
+      area(),
+      solid()
+    ]);
+
+  }
