@@ -1,6 +1,5 @@
-// import kaboom from "../node_modules/kaboom/dist/kaboom.js";
-// const kaboom = require('kaboom');
 import kaboom from "https://unpkg.com/kaboom@next/dist/kaboom.mjs";
+// import {kaboom} from "https://kaboomjs.com/lib/0.5.0/kaboom.js";
 
 const kaboomConf = {
   width: 1280,
