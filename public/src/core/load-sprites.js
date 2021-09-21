@@ -1,4 +1,4 @@
-export default function loadSprites(){
+export default () => {
     return [     
         loadSprite("patuti", "../sprites/patuti.png", {
             sliceX: 1,
@@ -7,7 +7,11 @@ export default function loadSprites(){
                 duck: {
                     from: 0,
                     to: 4,
-                    loop: false,
+                    loop: true,
+                },
+                stayDucked: {
+                    from: 4,
+                    to: 4,
                 },
                 idle: {
                     from: 5,
@@ -17,6 +21,7 @@ export default function loadSprites(){
                 jump: {
                     from: 7,
                     to: 13,
+                    loop: true,
                 },
                 left: {
                     from: 14,
