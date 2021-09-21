@@ -2,7 +2,7 @@ import k from "../core/kaboom.js";
 import controls from "../functions/controls.js";
 import { AREA_SCALE, PATUTI_SCALE, BG_SCALE, GAME } from "../core/constants.js";
 
-let isIdle = true;
+let isGrounded = true;
 
 export default () => {
   layers(["bg", "game", "ui"], "game");
@@ -39,18 +39,19 @@ export default () => {
 
   patuti.action(() => {
     if (
+      patuti.grounded() &&
       !keyIsDown("left") &&
       !keyIsDown("right") &&
       !keyIsDown("up") &&
-      !keyIsDown("down") &&
-      patuti.grounded()
+      !keyIsDown("down")
     ) {
         patuti.play("idling");
     }
 
     if(patuti.falling() && !patuti.grounded()){
-        patuti.play("falling");
+        patuti.play("falling")
     }
 
   });
+
 };

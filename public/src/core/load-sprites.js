@@ -4,11 +4,6 @@ export default () => {
             sliceX: 1,
             sliceY: 24,
             anims: {
-                // duck: {
-                //     from: 0,
-                //     to: 4,
-                //     loop: true,
-                // },
                 prepareDuck: {
                     from: 0,
                     to: 3,
@@ -32,10 +27,12 @@ export default () => {
                 prepareJump: {
                     from: 7, 
                     to: 9,
+                    loop: true,
                 },
                 prepareJumpIdle: {
                     from: 9,
-                    to: 9
+                    to: 9,
+                    loop: true,
                 },
                 jump: {
                     from: 10,
@@ -71,5 +68,7 @@ export default () => {
         }),
         loadSprite("area", "../sprites/area.png"),
         loadSprite("bg", "../sprites/background.png"),
+        loadSprite("bullet_h", "../sprites/bullet_h.png"),
+        loadSprite("bullet_v", "../sprites/bullet_v.png"),
     ]
 }

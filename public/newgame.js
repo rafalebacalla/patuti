@@ -4,12 +4,13 @@ import loadSprites from './src/core/load-sprites.js'
 
 loadSprites();
 
-// loadSprite("area", "../sprites/area.png"),
-// loadSprite("bg", "../sprites/background.png"),
-
 scene("game", patutiScene);
 
+// scene("gameOver", gameOverScene);
 
 focus();
 
 go("game");
+
+
+// go("gameOver");

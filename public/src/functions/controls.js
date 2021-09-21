@@ -5,32 +5,33 @@ export default function playerControls(){
         add(){
             let isDucking = false;
             let isPreparingJump = false;
+            // * LEFT
             keyPress("left", () => {
                 if(this.grounded() && !isPreparingJump && !isDucking){
-                    this.play("left");
+                    this.play("idling");
                     this.play("keepLeft");
                 }
             });
             keyDown("left", () => {
-                if(!isPreparingJump && !isDucking){
+                if(this.grounded() && !isPreparingJump || !isDucking){
                     this.move(-PATUTI.MS, 0);
                     this.dir = vec2(-1, 0);
                 }
             });
-
+            // * RIGHT
             keyPress("right", () => {
                 if(this.grounded() && !isPreparingJump && !isDucking){
-                    this.play("right");
+                    this.play("idling");
                     this.play("keepRight");
                 }
             })
             keyDown("right", () => {
-                if(!isPreparingJump && !isDucking){
+                if(this.grounded() && !isPreparingJump || !isDucking){
                     this.move(PATUTI.MS, 0);
                     this.dir = vec2(1, 0);
                 }
             });
-
+            // * KEY RELEASE
             keyRelease("right", () => {
                 if(this.grounded()){
                     this.play("idling");
@@ -41,11 +42,11 @@ export default function playerControls(){
                     this.play("idling");
                 }
             });
-
+            // * UP
             keyDown("up", () => {
                 this.play('prepareJump')
                 this.play('prepareJumpIdle')
-                isPreparingJump = true;
+                isPreparingJump = true
             });
 
             keyRelease("up", () => {
@@ -55,7 +56,7 @@ export default function playerControls(){
                     isPreparingJump = false;
                 // }
             });
-
+            // * DOWN
             keyPress("down", () => {
                 if(this.grounded()){
                     this.play("prepareDuck");
