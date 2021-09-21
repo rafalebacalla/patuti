@@ -69,6 +69,7 @@ export default () => {
         loadSprite("area", "../sprites/area.png"),
         loadSprite("bg", "../sprites/background.png"),
         loadSprite("bullet_h", "../sprites/bullet_h.png"),
+        loadSprite("bullet_hr", "../sprites/bullet_hr.png"),
         loadSprite("bullet_v", "../sprites/bullet_v.png"),
     ]
 }
