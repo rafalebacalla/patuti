@@ -139,10 +139,10 @@ export default (oldTime) => {
     hpText.text = "HP:" + hpText.value;
   })
 
-  patuti.collides("bigBullet", () => {
+  patuti.collides("bigBullet", (bigBullet) => {
     addKaboom(patuti.pos);
     shake(20);
-    destroy(bullet);
+    destroy(bigBullet);
     patuti.hurt(5);
     hpText.value -= 5;
     hpText.text = "HP:" + hpText.value;
