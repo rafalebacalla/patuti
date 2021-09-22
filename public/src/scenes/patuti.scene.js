@@ -1,7 +1,7 @@
 import k from "../core/kaboom.js";
 import controls from "../functions/controls.js";
 import { AREA_SCALE, PATUTI, GAME, BULLET } from "../core/constants.js";
-import spawn from "../functions/spawn.js";
+import spawnUtil from "../functions/spawn-util.js";
 
 export default (oldTime) => {
   layers(["bg", "game", "ui"], "game");
@@ -82,48 +82,15 @@ export default (oldTime) => {
   spawnBullet();
   spawnBullet();
   function spawnBullet() {
-    let x = patuti.pos.x;
-    let y = patuti.pos.y;
-
-
-    let size = parseInt(rand(1, 5));
-    let direction = parseInt(rand(0, 3));
-    let posConfig = { x: undefined, y: undefined };
-    let moveConfig = { dir: undefined, speed: BULLET.MS };
-    let spriteConfig = "";
-    let bulletScale = 0;
-    let tag = "";
-
-    if (direction == 0) {
-      posConfig = { x: width() * 0, y };
-      moveConfig = { dir: RIGHT, speed: BULLET.MS };
-      spriteConfig = "bullet_hr";
-    } else if (direction == 1) {
-      posConfig = { x: width() * 0.9, y };
-      moveConfig = { dir: LEFT, speed: BULLET.MS };
-      spriteConfig = "bullet_h";
-    } else {
-      posConfig = { x, y: height() * 0 };
-      moveConfig = { dir: DOWN, speed: BULLET.MS };
-      spriteConfig = "bullet_v";
-    }
-
-    if (size == 4) {
-      bulletScale = BULLET.BIG_SCALE;
-      tag = "bigBullet";
-    } else {
-      bulletScale = BULLET.SMALL_SCALE;
-      tag = "bullet";
-    }
-
+    const { x, y, dir, speed, sp, bs, tag } = spawnUtil(patuti.pos.x, patuti.pos.y);
     add([
       `${tag}`,
-      sprite(spriteConfig),
-      pos(posConfig.x, posConfig.y),
+      sprite(sp),
+      pos(x, y),
       origin("center"),
       area(),
-      scale(bulletScale),
-      move(moveConfig.dir, moveConfig.speed),
+      scale(bs),
+      move(dir, speed),
     ]),
       wait(rand(0, 5), () => {
         spawnBullet();
@@ -137,7 +104,7 @@ export default (oldTime) => {
     patuti.hurt(1);
     hpText.value--;
     hpText.text = "HP:" + hpText.value;
-  })
+  });
 
   patuti.collides("bigBullet", (bigBullet) => {
     addKaboom(patuti.pos);
@@ -147,6 +114,27 @@ export default (oldTime) => {
     hpText.value -= 5;
     hpText.text = "HP:" + hpText.value;
   });
+
+  collides("bigBullet", "bigBullet", (bigBullet) => {
+    shake(30);
+    addKaboom(bigBullet.pos);
+    destroy(bigBullet);
+  })
+
+  collides("bullet", "bigBullet", (bullet) => {
+    shake(5);
+    addKaboom(bullet.pos);
+    destroy(bullet);
+  })
+
+  collides("bullet", "bullet", (bullet) => {
+    shake(5);
+    addKaboom(bullet.pos);
+    destroy(bullet);
+  })
+
+
+
 };
 
 function gameOver(oldTime) {
