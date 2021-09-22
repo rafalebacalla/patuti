@@ -1,4 +1,4 @@
-import { GAME } from "../core/constants.js";
+import k from "../core/kaboom.js";
 import { BULLET } from "../core/constants.js";
 
 // pos y patuti
@@ -16,7 +16,7 @@ export default function spawn(dir, patuti, size) {
   if (dir == 1) {
     spriteS = "bullet_h";
     spawnPos = {
-      x: 1500,
+      x: k.width() * 1,
       y,
     };
     moveConf = {
@@ -28,7 +28,7 @@ export default function spawn(dir, patuti, size) {
     spriteS = "bullet_v";
     spawnPos = {
       x,
-      y: 20,
+      y: k.height() * 0,
     };
     moveConf = {
       dir: 90,
@@ -38,8 +38,8 @@ export default function spawn(dir, patuti, size) {
     // horizontal left to right
     spriteS = "bullet_hr";
     spawnPos = {
-      x: 50,
-      y,
+      x: k.width() * 0,
+      y, 
     };
     moveConf = {
       dir: 0,

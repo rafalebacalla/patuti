@@ -1,6 +1,5 @@
 import k from "../core/kaboom.js";
 import { PATUTI } from "../core/constants.js";
-import { PATUTI_SCALE } from "../core/constants.js";
 
 export default () => {
   layers(["bg", "game", "ui"], "game");
@@ -18,13 +17,11 @@ export default () => {
     "patuti",
     sprite("patuti"),
     layer("game"),
-    scale(PATUTI_SCALE),
+    scale(PATUTI.SCALE),
     pos(k.width() * 0.1, k.height() * 0.25),
     origin("center"),
-    area(scale(0.4, 0.8)),
-    // move(PATUTI.MS, 0),
+    // area(scale(0.4, 0.8)),
     move(0, PATUTI.MS / 4),
-    // body(),
   ]);
   patuti.play("keepRight");
   add([

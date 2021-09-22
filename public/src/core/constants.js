@@ -6,6 +6,7 @@ export const GAME = {
 export const PATUTI = {
   MS: 250,
   JUMP_FORCE: 800,
+  SCALE: GAME.S/3,
 };
 
 export const BULLET = {
@@ -13,6 +14,6 @@ export const BULLET = {
   SMALL_SCALE: 0.3,
   BIG_SCALE: 1,
 };
-export const PATUTI_SCALE = GAME.S / 3;
+
 export const AREA_SCALE = GAME.S * 0.7;
 export const BG_SCALE = GAME.S * 0.9;

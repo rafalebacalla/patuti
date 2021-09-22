@@ -1,9 +1,9 @@
 import k from "../core/kaboom.js";
 import controls from "../functions/controls.js";
-import { AREA_SCALE, PATUTI_SCALE, GAME } from "../core/constants.js";
+import { AREA_SCALE, PATUTI, GAME } from "../core/constants.js";
 import spawn from "../functions/spawn.js";
 
-export default () => {
+export default (oldTime) => {
   layers(["bg", "game", "ui"], "game");
 
   add([
@@ -19,11 +19,12 @@ export default () => {
     controls(),
     sprite("patuti", { anims: "idling" }),
     layer("game"),
-    scale(PATUTI_SCALE),
+    scale(PATUTI.SCALE),
     pos(k.width() * 0.5, k.height() * 0.6),
     origin("center"),
     area(scale(0.4, 0.8)),
     body(),
+    health(10),
   ]);
 
   add([
@@ -36,7 +37,7 @@ export default () => {
     solid(),
   ]);
 
-  const score = add([
+  const hpText = add([
     layer("ui"),
     text("HP: 10", {
       size: 24,
@@ -69,8 +70,13 @@ export default () => {
       patuti.pos.x >= GAME.W ||
       patuti.pos.x <= 0
     ) {
-      go("gameOver");
+      gameOver(oldTime);
     }
+  });
+
+  patuti.on("death", () => {
+    destroy(patuti);
+    gameOver(oldTime);
   });
 
   // Spawn vertical
@@ -98,23 +104,24 @@ export default () => {
   collides("patuti", "bullet", () => {
     addKaboom(patuti.pos);
     shake(3);
-    score.value -= 1;
-    score.text = "HP:" + score.value;
-    if (score.value < 0) {
-      go("gameOver");
-    }
-    // destroy('bullet')
+    patuti.hurt(1);
+    hpText.value--;
+    hpText.text = "HP:" + hpText.value;
   });
 
   collides("patuti", "bigBullet", () => {
     addKaboom(patuti.pos);
-    shake(10);
-    score.value -= 4;
-    score.text = "HP:" + score.value;
-    if (score.value < 0) {
-      go("gameOver");
-    }
+    shake(15);
+    patuti.hurt(3);
+    hpText.value -= 3;
+    hpText.text = "HP:" + hpText.value;
   });
-
-  //
 };
+
+function gameOver(oldTime) {
+  let timeSurvived = time();
+  if(!!oldTime){
+    timeSurvived -= oldTime;
+  }
+  go("gameOver", timeSurvived);
+}

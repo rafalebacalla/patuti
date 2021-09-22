@@ -1,6 +1,10 @@
 import k from "../core/kaboom.js";
 
-export default (score) => {
+// function calculateScore(hp, time){
+//     return (hp * 100) + (tim)
+// }
+
+export default (timeSurvived) => {
   layers(["bg", "game", "ui"], "game");
 
   add([
@@ -11,27 +15,43 @@ export default (score) => {
     origin("center"),
   ]);
 
-  const scoreText = add([
-    layer("ui"),
-    text("SCORE: 10", {
-      size: 36,
+  let score = parseInt(timeSurvived * 100);
+  let highScore = localStorage.getItem("highScore");
+
+  if (highScore < score) {
+    localStorage.setItem("highScore", score);
+    add([
+      layer("ui"),
+      text(`NEW HIGH SCORE: ${score}`, {
+        size: 36,
+      }),
+      pos(k.width() * 0.5, k.height() * 0.6),
+      origin("center"),
+    ]);
+  } else {
+    add([
+      layer("ui"),
+      text(`SCORE: ${score}`, {
+        size: 36,
+      }),
+      pos(k.width() * 0.5, k.height() * 0.6),
+      origin("center"),
+    ]);
+  }
+
+  add([
+    text("Press SPACE to play again.", {
+      size: 24,
     }),
-    pos(k.width() * 0.5, k.height() * 0.6),
-    {
-      value: 10,
-    },
+    pos(k.width() * 0.5, k.height() * 0.7),
     origin("center"),
   ]);
 
-  // add([
-  //     sprite("bg"),
-  //     layer("bg"),
-  //     pos(k.width() * 0.5, k.height() * 0.5),
-  //     origin("center"),
-  //     scale(1),
-  // ]);
-
   keyPress("space", () => {
-    go("game");
+    score = 0;
+    highScore = 0;
+    const oldTime = timeSurvived;
+    console.log("time retry", oldTime)
+    go("game", oldTime);
   });
 };
