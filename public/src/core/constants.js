@@ -4,13 +4,14 @@ export const GAME = {
   S: 1,
 };
 export const PATUTI = {
-  MS: 325,
+  MS: 360,
   JUMP_FORCE: 800,
-  SCALE: GAME.S/3,
+  SCALE: GAME.S / 3,
 };
 
 export const BULLET = {
-  MS: 350,
+  MAX_MS: 500,
+  MIN_MS: 100,
   SMALL_SCALE: 0.3,
   BIG_SCALE: 1,
 };

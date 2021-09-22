@@ -50,11 +50,9 @@ export default function playerControls() {
       });
 
       keyRelease("up", () => {
-        // if(this.grounded()){
         this.play("jump");
         this.jump(PATUTI.JUMP_FORCE);
         isPreparingJump = false;
-        // }
       });
       // * DOWN
       keyPress("down", () => {

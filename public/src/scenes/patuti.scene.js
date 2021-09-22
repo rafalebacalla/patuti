@@ -1,6 +1,6 @@
 import k from "../core/kaboom.js";
 import controls from "../functions/controls.js";
-import { AREA_SCALE, PATUTI, GAME, BULLET } from "../core/constants.js";
+import { AREA_SCALE, PATUTI, GAME } from "../core/constants.js";
 import spawnUtil from "../functions/spawn-util.js";
 
 export default (oldTime) => {
@@ -40,7 +40,7 @@ export default (oldTime) => {
   const hpText = add([
     layer("ui"),
     text("HP: 10", {
-      size: 24,
+      size: 36,
     }),
     pos(k.width() * 0.1, k.height() * 0.1),
     {
@@ -82,7 +82,10 @@ export default (oldTime) => {
   spawnBullet();
   spawnBullet();
   function spawnBullet() {
-    const { x, y, dir, speed, sp, bs, tag } = spawnUtil(patuti.pos.x, patuti.pos.y);
+    const { x, y, dir, speed, sp, bs, tag } = spawnUtil(
+      patuti.pos.x,
+      patuti.pos.y
+    );
     add([
       `${tag}`,
       sprite(sp),
@@ -119,22 +122,19 @@ export default (oldTime) => {
     shake(30);
     addKaboom(bigBullet.pos);
     destroy(bigBullet);
-  })
+  });
 
   collides("bullet", "bigBullet", (bullet) => {
     shake(5);
     addKaboom(bullet.pos);
     destroy(bullet);
-  })
+  });
 
   collides("bullet", "bullet", (bullet) => {
     shake(5);
     addKaboom(bullet.pos);
     destroy(bullet);
-  })
-
-
-
+  });
 };
 
 function gameOver(oldTime) {
