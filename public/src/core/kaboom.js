@@ -6,10 +6,9 @@ const kaboomConf = {
   width: GAME.W,
   height: GAME.H,
   scale: GAME.S,
-  debug: true,
+  debug: false,
   font: "sinko",
   global: true,
-  // fullScreen: true,
   clearColor: [0, 0, 0, 1],
 };
 
