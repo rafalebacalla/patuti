@@ -5,12 +5,16 @@ import { BULLET } from "../core/constants.js";
 // pos y patuti
 // pos x patuti
 // 
-export default function spawn(x, y, angle) {
+export default function spawn(dir, patuti, size) {
     // 1 = horizontal right to left
+    let x = patuti.x;
+    let y = patuti.y;
     let spawnPos = {};
     let moveConf = {};
     let spriteS = "";
-    if(angle == 1){
+    let bScale = (!!size) ? 1 : 0.3;
+    let bSpeed = (!!size) ? BULLET.MS : BULLET.MS
+    if(dir == 1){
         spriteS = "bullet_h"
         spawnPos = {
             x : 1500,
@@ -18,9 +22,9 @@ export default function spawn(x, y, angle) {
         }
         moveConf = {
             dir: 0,
-            speed: -BULLET.MS,
+            speed: -bSpeed,
         }
-    } else if (angle == 2) { // 2 = vertical 
+    } else if (dir == 2) { // 2 = vertical 
         spriteS = "bullet_v"
         spawnPos = {
             x,
@@ -28,9 +32,9 @@ export default function spawn(x, y, angle) {
         }
         moveConf = {
             dir: 90,
-            speed: BULLET.MS,
+            speed: bSpeed,
         }
-    } else if (angle == 3) { // horizontal left to right
+    } else if (dir == 3) { // horizontal left to right
         spriteS = "bullet_hr"
         spawnPos = {
             x : 50,
@@ -38,7 +42,7 @@ export default function spawn(x, y, angle) {
         }
         moveConf = {
             dir: 0,
-            speed: BULLET.MS,
+            speed: bSpeed,
         }
     }
 
@@ -51,9 +55,8 @@ export default function spawn(x, y, angle) {
                     pos(spawnPos.x, spawnPos.y),
                     origin('center'),
                     area(),
-                    scale(0.3),
+                    scale(bScale),
                     move(moveConf.dir, moveConf.speed),
-                    
                 ])
             });
         }
