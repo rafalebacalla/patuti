@@ -10,6 +10,7 @@ const kaboomConf = {
   font: "sinko",
   global: true,
   // fullScreen: true,
+  clearColor: [0, 0, 0, 1],
 };
 
 const k = kaboom(kaboomConf);
