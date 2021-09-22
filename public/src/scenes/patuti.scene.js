@@ -20,7 +20,7 @@ export default (oldTime) => {
     sprite("patuti", { anims: "idling" }),
     layer("game"),
     scale(PATUTI.SCALE),
-    pos(k.width() * 0.5, k.height() * 0.6),
+    pos(k.width() * 0.33, k.height() * 0.6),
     origin("center"),
     area(scale(0.4, 0.8)),
     body(),
@@ -31,7 +31,17 @@ export default (oldTime) => {
     sprite("area"),
     layer("game"),
     scale(AREA_SCALE),
-    pos(k.width() * 0.5, k.height() * 0.8),
+    pos(k.width() * 0.33, k.height() * 0.85),
+    origin("center"),
+    area(),
+    solid(),
+  ]);
+
+  add([
+    sprite("area"),
+    layer("game"),
+    scale(AREA_SCALE),
+    pos(k.width() * 0.66, k.height() * 0.85),
     origin("center"),
     area(),
     solid(),
@@ -120,6 +130,8 @@ export default (oldTime) => {
 
   collides("bigBullet", "bigBullet", (bigBullet) => {
     shake(30);
+    addKaboom(bigBullet.pos);
+    addKaboom(bigBullet.pos);
     addKaboom(bigBullet.pos);
     destroy(bigBullet);
   });
