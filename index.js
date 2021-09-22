@@ -21,10 +21,8 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 };
 
-// Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 app.listen(port, () => {
-  console.log("firebase", firebaseConfig)
   console.log(`App running at port ${port}`);
 });

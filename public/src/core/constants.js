@@ -4,7 +4,7 @@ export const GAME = {
   S: 1,
 };
 export const PATUTI = {
-  MS: 250,
+  MS: 325,
   JUMP_FORCE: 800,
   SCALE: GAME.S/3,
 };

@@ -1,6 +1,6 @@
 import k from "../core/kaboom.js";
 import controls from "../functions/controls.js";
-import { AREA_SCALE, PATUTI, GAME } from "../core/constants.js";
+import { AREA_SCALE, PATUTI, GAME, BULLET } from "../core/constants.js";
 import spawn from "../functions/spawn.js";
 
 export default (oldTime) => {
@@ -79,48 +79,79 @@ export default (oldTime) => {
     gameOver(oldTime);
   });
 
-  // Spawn vertical
-  loop(7, () => {
-    const spawner = add([spawn(2, patuti.pos)]);
-    spawner.spawn(2, patuti.pos);
-  });
-  // Spawn horizontal right to left
-  loop(4, () => {
-    const spawner = add([spawn(1, patuti.pos)]);
-    spawner.spawn(1, patuti.pos);
-  });
+  spawnBullet();
+  spawnBullet();
+  function spawnBullet() {
+    let x = patuti.pos.x;
+    let y = patuti.pos.y;
 
-  // Spawn horizontal left to right
-  loop(2, () => {
-    const spawner = add([spawn(3, patuti.pos)]);
-    spawner.spawn(3, patuti.pos);
-  });
 
-  loop(30, () => {
-    const spawner = add([spawn(3, patuti.pos, 1)]);
-    spawner.spawn(3, patuti.pos, 1);
-  });
+    let size = parseInt(rand(1, 5));
+    let direction = parseInt(rand(0, 3));
+    let posConfig = { x: undefined, y: undefined };
+    let moveConfig = { dir: undefined, speed: BULLET.MS };
+    let spriteConfig = "";
+    let bulletScale = 0;
+    let tag = "";
 
-  collides("patuti", "bullet", () => {
+    if (direction == 0) {
+      posConfig = { x: width() * 0, y };
+      moveConfig = { dir: RIGHT, speed: BULLET.MS };
+      spriteConfig = "bullet_hr";
+    } else if (direction == 1) {
+      posConfig = { x: width() * 0.9, y };
+      moveConfig = { dir: LEFT, speed: BULLET.MS };
+      spriteConfig = "bullet_h";
+    } else {
+      posConfig = { x, y: height() * 0 };
+      moveConfig = { dir: DOWN, speed: BULLET.MS };
+      spriteConfig = "bullet_v";
+    }
+
+    if (size == 4) {
+      bulletScale = BULLET.BIG_SCALE;
+      tag = "bigBullet";
+    } else {
+      bulletScale = BULLET.SMALL_SCALE;
+      tag = "bullet";
+    }
+
+    add([
+      `${tag}`,
+      sprite(spriteConfig),
+      pos(posConfig.x, posConfig.y),
+      origin("center"),
+      area(),
+      scale(bulletScale),
+      move(moveConfig.dir, moveConfig.speed),
+    ]),
+      wait(rand(0, 5), () => {
+        spawnBullet();
+      });
+  }
+
+  patuti.collides("bullet", (bullet) => {
     addKaboom(patuti.pos);
     shake(3);
+    destroy(bullet);
     patuti.hurt(1);
     hpText.value--;
     hpText.text = "HP:" + hpText.value;
-  });
+  })
 
-  collides("patuti", "bigBullet", () => {
+  patuti.collides("bigBullet", () => {
     addKaboom(patuti.pos);
-    shake(15);
-    patuti.hurt(3);
-    hpText.value -= 3;
+    shake(20);
+    destroy(bullet);
+    patuti.hurt(5);
+    hpText.value -= 5;
     hpText.text = "HP:" + hpText.value;
   });
 };
 
 function gameOver(oldTime) {
   let timeSurvived = time();
-  if(!!oldTime){
+  if (!!oldTime) {
     timeSurvived -= oldTime;
   }
   go("gameOver", timeSurvived);
