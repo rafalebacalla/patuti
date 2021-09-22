@@ -51,7 +51,6 @@ export default (timeSurvived) => {
     score = 0;
     highScore = 0;
     const oldTime = timeSurvived;
-    console.log("time retry", oldTime)
     go("game", oldTime);
   });
 };
