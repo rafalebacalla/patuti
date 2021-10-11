@@ -1,10 +1,14 @@
 # Patuti
 https://patuti-alien.web.app/
 
-### A simple Javascript web game created for the course IT461 - Advanced Web Systems.
-#### A simple Javascript game. 
+### A simple Javascript web game created using KaboomJS.
 Patuti, the alien, has to dodge all the bullets and must not get hit.
-#### This project was created using KaboomJS, NodeJS, and ExpressJS
+#### This project was created using KaboomJS, NodeJS, and ExpressJS.
+
+## KaboomJS
+https://kaboomjs.com/ </br>
+I will not be updating this game anymore. </br>
+So if the game doesn't work anymore, then it's probably because KaboomJS has new updates.
 
 ## Installation
 
