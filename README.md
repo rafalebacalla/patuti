@@ -1,6 +1,8 @@
 # Patuti
 https://patuti-alien.web.app/
 
+Turn on your browser's hardware acceleration for things to work smoothly.
+
 ### A simple Javascript web game created using KaboomJS.
 Patuti, the alien, has to dodge all the bullets and must not get hit.
 #### This project was created using KaboomJS, NodeJS, and ExpressJS.
